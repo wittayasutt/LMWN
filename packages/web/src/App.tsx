@@ -1,8 +1,10 @@
+import Layout from '@/components/layouts';
+
 const App = () => {
 	return (
-		<div>
+		<Layout>
 			<h1>Edit this app to complete LINE MAN Wongnai Frontend Assignment!</h1>
-		</div>
+		</Layout>
 	);
 };
 
