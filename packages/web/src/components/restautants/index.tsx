@@ -2,7 +2,11 @@ import styled from 'styled-components';
 
 import { RestaurantType } from '@/types/restaurants';
 
-type Restautant = {
+import Container from '@/components/container';
+import Title from '@/components/title';
+import Menu from '@/components/menu';
+
+type RestautantProps = {
 	data: RestaurantType;
 };
 
@@ -15,12 +19,16 @@ const CoverImage = styled.img`
 	object-fit: cover;
 `;
 
-const Restautant = ({ data }: Restautant) => {
+const RestautantComponent = ({ data }: RestautantProps) => {
 	return (
 		<Wrapper>
 			<CoverImage src={data.coverImage} alt={data.name} />
+			<Container>
+				<Title title={data.name} />
+				<Menu id={data.id} menus={data.menus} />
+			</Container>
 		</Wrapper>
 	);
 };
 
-export default Restautant;
+export default RestautantComponent;

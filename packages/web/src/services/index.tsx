@@ -21,7 +21,7 @@ export const serviceGetRestaurant = (id: number) => {
 		});
 };
 
-export const serviceGetRestaurantShortMenu = (id: string, menuName: string) => {
+export const serviceGetRestaurantShortMenu = (id: number, menuName: string) => {
 	return $axios
 		.get(`/restaurants/${id}/menus/${menuName}/short`)
 		.then((response: AxiosResponse) => {
@@ -33,7 +33,7 @@ export const serviceGetRestaurantShortMenu = (id: string, menuName: string) => {
 		});
 };
 
-export const serviceGetRestaurantFullMenu = (id: string, menuName: string) => {
+export const serviceGetRestaurantFullMenu = (id: number, menuName: string) => {
 	return $axios
 		.get(`/restaurants/${id}/menus/${menuName}/full`)
 		.then((response: AxiosResponse) => {

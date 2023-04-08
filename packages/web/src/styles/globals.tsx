@@ -1,6 +1,15 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
+	@font-face {
+		font-family: 'Prompt';
+		src: url('/fonts/Prompt-Light.ttf') format('truetype');
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		font-display: swap;
+	}
+
 	*,
 	*::before,
 	*::after {
@@ -13,6 +22,7 @@ export const GlobalStyles = createGlobalStyle`
 	body {
 		padding: 0;
 		margin: 0;
+		font-family: 'Prompt';
 	}
 
 	a {

@@ -34,7 +34,11 @@ const App = () => {
 		return <Spinner isFull />;
 	}
 
-	return <Layout>{restaurant ? <Restautant data={restaurant} /> : null}</Layout>;
+	return (
+		<Layout title={restaurant?.name} description={restaurant?.name}>
+			{restaurant ? <Restautant data={restaurant} /> : null}
+		</Layout>
+	);
 };
 
 export default App;

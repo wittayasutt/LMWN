@@ -28,15 +28,15 @@ export type RestaurantType = {
 export type RestaurantShortMenuType = {
 	name: string;
 	id: string;
-	thumbnailImage?: string | null;
+	thumbnailImage: string | null;
 	fullPrice: number;
 	discountedPercent: number;
-	discountedTimePeriod?: DiscountedTimePeriodType;
+	discountedTimePeriod: DiscountedTimePeriodType;
 	sold: number;
 	totalInStock: number;
 };
 
 export type RestaurantFullMenuType = RestaurantShortMenuType & {
-	largeImage?: string | null;
+	largeImage: string | null;
 	options: RestaurantOptionType[];
 };
