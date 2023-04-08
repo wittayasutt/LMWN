@@ -10,6 +10,7 @@ import Thumbnail from '@/components/menu/thumbnail';
 type MenuProps = {
 	id: number;
 	menu: string;
+	onSelect: Function;
 };
 
 type WrapperProps = {
@@ -42,7 +43,7 @@ const Title = styled.h4`
 
 const Price = styled.span``;
 
-const MenuItemComponent = ({ id, menu }: MenuProps) => {
+const MenuItemComponent = ({ id, menu, onSelect }: MenuProps) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [shortMenu, setShortMenu] = useState<RestaurantShortMenuType>();
 
@@ -58,12 +59,16 @@ const MenuItemComponent = ({ id, menu }: MenuProps) => {
 		}
 	}, []);
 
+	const handleSelectMenu = () => {
+		onSelect(menu);
+	};
+
 	useEffect(() => {
 		fetchMenu(menu);
 	}, [id, menu]);
 
 	return (
-		<Wrapper fetching={isLoading}>
+		<Wrapper fetching={isLoading} onClick={handleSelectMenu}>
 			<Thumbnail thumbnail={shortMenu?.thumbnailImage ?? null} alt={shortMenu?.name ?? ''} />
 			{!isLoading && (
 				<TextWrapper>
