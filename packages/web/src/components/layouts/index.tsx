@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import styled from 'styled-components';
 
 import Header from '@/components/headers';
-
 import text from '@/const/text';
 
 type LayoutProps = {
@@ -16,7 +16,6 @@ const Wrapper = styled.div`
 	flex-direction: column;
 
 	min-height: 100vh;
-	background-color: ${(props) => props.theme.colors.background};
 `;
 
 const Main = styled.main`
@@ -25,12 +24,12 @@ const Main = styled.main`
 
 const DefaultLayout = ({ children, title = text.siteTitle, description = text.siteDescription }: LayoutProps) => {
 	return (
-		<>
+		<HelmetProvider>
 			<Header title={title} description={description} />
 			<Wrapper>
 				<Main>{children}</Main>
 			</Wrapper>
-		</>
+		</HelmetProvider>
 	);
 };
 

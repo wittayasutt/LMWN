@@ -15,10 +15,23 @@ export const getRestaurant = async (req: Request, res: Response, next: NextFunct
 	}
 };
 
-export const getRestaurantMenu = async (req: Request, res: Response, next: NextFunction) => {
+export const getRestaurantShortMenu = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const { id: restaurantId, menuName, isFull } = req.params;
-		const url = `/restaurants/${restaurantId}/menus/${menuName}/${isFull ? 'full' : 'short'}.json`;
+		const { id: restaurantId, menuName } = req.params;
+		const url = `/restaurants/${restaurantId}/menus/${menuName}/short.json`;
+
+		const response: AxiosResponse = await $axios.get(url);
+
+		return res.status(response.status).json(response.data);
+	} catch (error) {
+		next(error);
+	}
+};
+
+export const getRestaurantFullMenu = async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { id: restaurantId, menuName } = req.params;
+		const url = `/restaurants/${restaurantId}/menus/${menuName}/full.json`;
 
 		const response: AxiosResponse = await $axios.get(url);
 
