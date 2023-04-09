@@ -1,5 +1,6 @@
 const text = {
 	baht: 'บาท',
+	close: 'ปิด',
 	free: 'ฟรี',
 	open: 'เปิด',
 	price: 'ราคา',

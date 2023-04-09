@@ -1,34 +1,17 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { RestaurantType } from '@/types/restaurants';
-import { serviceGetRestaurant } from '@/services';
+import uesRestaurants from '@/hooks/uesRestaurants';
 
 import Layout from '@/components/layouts';
 import Spinner from '@/components/spinner';
 import Restautant from '@/components/restautants';
 
-const RESTAURANT_ID = 567051;
-
 const App = () => {
-	const [isLoading, setIsLoading] = useState(true);
-	const [restaurant, setRestaurant] = useState<RestaurantType | null>();
-
-	const fetchData = useCallback(async () => {
-		setIsLoading(true);
-
-		try {
-			const res = await serviceGetRestaurant(RESTAURANT_ID);
-			setRestaurant(res);
-		} catch (err) {
-			console.error(err);
-		} finally {
-			setIsLoading(false);
-		}
-	}, []);
+	const { restaurant, fetchRestaurant, isLoadingRestaurant: isLoading } = uesRestaurants();
 
 	useEffect(() => {
-		fetchData();
-	}, [fetchData]);
+		fetchRestaurant();
+	}, [fetchRestaurant]);
 
 	if (isLoading) {
 		return <Spinner isFull />;

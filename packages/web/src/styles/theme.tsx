@@ -4,6 +4,7 @@ export const theme = {
 		grey2: '#A3A3A3',
 		grey3: '#EEEEEE',
 		primary: '#39DC00',
+		red: '#F50057',
 		white: '#FFFFFF',
 	},
 	breakpoints: {

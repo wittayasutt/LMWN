@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { RestaurantMenuType } from '@/types/restaurants';
 import text from '@/const/text';
-import { isDesktop } from '@/helpers';
+import { isDesktop } from '@/helpers/media';
 
 import Thumbnail from '@/components/modal/menu/thumbnail';
 import Options from '@/components/modal/menu/options';
@@ -50,11 +50,15 @@ const TitleWrapper = styled.div`
 const Title = styled.h3`
 	flex: 1;
 
-	font-size: 1.75rem;
+	font-size: 1.25rem;
 	text-align: center;
 
 	margin-left: 4rem;
 	padding: 0.5rem;
+
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+		font-size: 1.75rem;
+	}
 `;
 
 const CloseWrapper = styled.div`
@@ -81,11 +85,19 @@ const PriceWrapper = styled.div`
 `;
 
 const Price = styled.h4`
-	font-size: 1.25rem;
+	font-size: 1rem;
+
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+		font-size: 1.25rem;
+	}
 `;
 
 const Recommend = styled.h4`
-	font-size: 1.25rem;
+	font-size: 1rem;
+
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+		font-size: 1.25rem;
+	}
 `;
 
 const ModalMenuComponent = ({ menu, isLoading, isOpen, onClose }: ModalComponentProps) => {

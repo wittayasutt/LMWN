@@ -1,8 +1,18 @@
+import { useEffect, useState } from 'react';
+
 import styled from 'styled-components';
 import text from '@/const/text';
+import { ActiveTimePeriodType } from '@/types/restaurants';
+
+import uesRestaurants from '@/hooks/uesRestaurants';
 
 type TitleProps = {
 	title: string;
+	activeTimePeriod: ActiveTimePeriodType;
+};
+
+type StatusProp = {
+	isOpen: boolean;
 };
 
 const Wrapper = styled.div`
@@ -24,7 +34,7 @@ const StatusWrapper = styled.div`
 	margin-left: 0.5rem;
 `;
 
-const Status = styled.span`
+const Status = styled.span<StatusProp>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -34,7 +44,7 @@ const Status = styled.span`
 
 	font-size: 0.75rem;
 	color: ${(props) => props.theme.colors.white};
-	background-color: ${(props) => props.theme.colors.primary};
+	background-color: ${(props) => (props.isOpen ? props.theme.colors.primary : props.theme.colors.red)};
 
 	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
 		width: 4rem;
@@ -42,12 +52,21 @@ const Status = styled.span`
 	}
 `;
 
-const TitleComponent = ({ title }: TitleProps) => {
+const TitleComponent = ({ title, activeTimePeriod }: TitleProps) => {
+	const { getIsRestaurantOpen } = uesRestaurants();
+
+	const [isRestaurantOpen, setIsRestaurantOpen] = useState(false);
+
+	useEffect(() => {
+		const isOpen = getIsRestaurantOpen(activeTimePeriod);
+		setIsRestaurantOpen(isOpen);
+	}, [activeTimePeriod]);
+
 	return (
 		<Wrapper>
 			<Title>{title}</Title>
 			<StatusWrapper>
-				<Status>{text.open}</Status>
+				<Status isOpen={isRestaurantOpen}>{isRestaurantOpen ? text.open : text.close}</Status>
 			</StatusWrapper>
 		</Wrapper>
 	);

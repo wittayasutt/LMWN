@@ -24,7 +24,7 @@ const RestautantComponent = ({ data }: RestautantProps) => {
 		<Wrapper>
 			<CoverImage src={data.coverImage} alt={data.name} />
 			<Container>
-				<Title title={data.name} />
+				<Title title={data.name} activeTimePeriod={data.activeTimePeriod} />
 				<Menu id={data.id} menus={data.menus} />
 			</Container>
 		</Wrapper>
