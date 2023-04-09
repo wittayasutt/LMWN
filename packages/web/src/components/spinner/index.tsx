@@ -12,7 +12,7 @@ const SpinnerWrapper = styled.div`
 	align-items: center;
 
 	width: 100%;
-	height: 10rem;
+	height: 5rem;
 `;
 
 const Spinner = ({ isFull = false }: SpinnerWrapper) => {

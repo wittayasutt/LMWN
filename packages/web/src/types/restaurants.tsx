@@ -25,7 +25,7 @@ export type RestaurantType = {
 	activeTimePeriod: ActiveTimePeriodType;
 };
 
-export type RestaurantShortMenuType = {
+export type RestaurantMenuType = {
 	name: string;
 	id: string;
 	thumbnailImage: string | null;
@@ -34,9 +34,6 @@ export type RestaurantShortMenuType = {
 	discountedTimePeriod: DiscountedTimePeriodType;
 	sold: number;
 	totalInStock: number;
-};
-
-export type RestaurantFullMenuType = RestaurantShortMenuType & {
-	largeImage: string | null;
-	options: RestaurantOptionType[];
+	largeImage?: string | null;
+	options?: RestaurantOptionType[];
 };

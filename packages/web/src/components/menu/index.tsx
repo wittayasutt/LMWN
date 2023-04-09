@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
-import { RestaurantFullMenuType } from '@/types/restaurants';
+import { RestaurantMenuType } from '@/types/restaurants';
 import { serviceGetRestaurantFullMenu } from '@/services';
 
 import MenuItem from '@/components/menu/item';
@@ -15,20 +15,30 @@ type MenuProps = {
 const Wrapper = styled.ul``;
 
 const MenuComponent = ({ id, menus }: MenuProps) => {
-	const [selectedMenu, setSelectedItem] = useState<RestaurantFullMenuType | null>(null);
+	const [isLoading, setIsLoading] = useState(false);
+	const [selectedMenu, setSelectedItem] = useState<RestaurantMenuType | null>(null);
 
 	const fetchMenu = useCallback(async (menu) => {
+		setIsLoading(true);
+		setSelectedItem(menu);
+
 		try {
-			const res = await serviceGetRestaurantFullMenu(id, menu);
+			const res = await serviceGetRestaurantFullMenu(id, menu.name);
 
 			setSelectedItem(res);
 		} catch (err) {
 			console.error(err);
+		} finally {
+			setIsLoading(false);
 		}
 	}, []);
 
-	const handleSelectMenu = (selectingMenu: string) => {
+	const handleSelectMenu = (selectingMenu: RestaurantMenuType) => {
 		fetchMenu(selectingMenu);
+	};
+
+	const handleCloseModal = () => {
+		setSelectedItem(null);
 	};
 
 	return (
@@ -39,7 +49,7 @@ const MenuComponent = ({ id, menus }: MenuProps) => {
 				})}
 			</Wrapper>
 
-			{selectedMenu && <ModalMenu isOpen={!!selectedMenu} menu={selectedMenu} />}
+			<ModalMenu menu={selectedMenu} isLoading={isLoading} isOpen={!!selectedMenu} onClose={handleCloseModal} />
 		</>
 	);
 };

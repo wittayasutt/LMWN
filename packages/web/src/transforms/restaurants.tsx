@@ -1,9 +1,4 @@
-import {
-	RestaurantOptionType,
-	RestaurantType,
-	RestaurantShortMenuType,
-	RestaurantFullMenuType,
-} from '@/types/restaurants';
+import { RestaurantOptionType, RestaurantType, RestaurantMenuType } from '@/types/restaurants';
 
 export const transformRestaurantOption = (option: any): RestaurantOptionType => {
 	return {
@@ -27,7 +22,7 @@ export const transformRestaurant = (res: any): RestaurantType => {
 	};
 };
 
-export const transformRestaurantShortMenu = (res: any): RestaurantShortMenuType => {
+export const transformRestaurantShortMenu = (res: any): RestaurantMenuType => {
 	return {
 		name: res.name,
 		id: res.id,
@@ -43,7 +38,7 @@ export const transformRestaurantShortMenu = (res: any): RestaurantShortMenuType 
 	};
 };
 
-export const transformRestaurantFullMenu = (res: any): RestaurantFullMenuType => {
+export const transformRestaurantFullMenu = (res: any): RestaurantMenuType => {
 	return {
 		name: res.name,
 		id: res.id,

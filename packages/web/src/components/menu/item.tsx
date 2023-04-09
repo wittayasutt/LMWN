@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import text from '@/const/text';
-import { RestaurantShortMenuType } from '@/types/restaurants';
+import { RestaurantMenuType } from '@/types/restaurants';
 import { serviceGetRestaurantShortMenu } from '@/services';
 
 import Thumbnail from '@/components/menu/thumbnail';
@@ -45,7 +45,7 @@ const Price = styled.span``;
 
 const MenuItemComponent = ({ id, menu, onSelect }: MenuProps) => {
 	const [isLoading, setIsLoading] = useState(true);
-	const [shortMenu, setShortMenu] = useState<RestaurantShortMenuType>();
+	const [shortMenu, setShortMenu] = useState<RestaurantMenuType>();
 
 	const fetchMenu = useCallback(async (menu) => {
 		try {
@@ -60,7 +60,7 @@ const MenuItemComponent = ({ id, menu, onSelect }: MenuProps) => {
 	}, []);
 
 	const handleSelectMenu = () => {
-		onSelect(menu);
+		onSelect(shortMenu);
 	};
 
 	useEffect(() => {
