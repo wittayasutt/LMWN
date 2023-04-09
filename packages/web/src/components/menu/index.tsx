@@ -61,6 +61,7 @@ const MenuComponent = ({ id, menus }: MenuProps) => {
 
 			<ModalMenu
 				menu={restaurantFullMenu}
+				topDishes={topDishes}
 				isLoading={isLoading}
 				isOpen={!!restaurantFullMenu}
 				onClose={handleCloseModal}

@@ -11,6 +11,11 @@ const ThumbnailImage = styled.img`
 	border-radius: 1rem;
 
 	object-fit: cover;
+
+	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+		width: 8rem;
+		height: 8rem;
+	}
 `;
 
 const MockImage = styled.img`
@@ -19,6 +24,11 @@ const MockImage = styled.img`
 	border-radius: 1rem;
 
 	background-color: ${(props) => props.theme.colors.grey2};
+
+	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+		width: 8rem;
+		height: 8rem;
+	}
 `;
 
 const ThumbnailComponent = ({ alt, thumbnail }: ThumbnailProps) => {

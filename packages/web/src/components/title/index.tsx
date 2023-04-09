@@ -26,6 +26,10 @@ const Title = styled.h1`
 	font-size: 1.5rem;
 
 	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+		font-size: 2rem;
+	}
+
+	@media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
 		font-size: 2.5rem;
 	}
 `;

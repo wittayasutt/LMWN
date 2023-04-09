@@ -56,6 +56,10 @@ const TextWrapper = styled.div`
 
 const Title = styled.h4`
 	line-height: 2rem;
+
+	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+		font-size: 1.25rem;
+	}
 `;
 
 const MenuItemComponent = ({ id, menu, topDishes, onFetchSuccess, onSelect }: MenuProps) => {
