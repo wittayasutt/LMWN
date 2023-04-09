@@ -8,8 +8,9 @@ type ThumbnailProps = {
 const ThumbnailImage = styled.img`
 	width: 6rem;
 	height: 6rem;
-	border-radius: 1rem;
+	display: flex;
 
+	border-radius: 1rem;
 	object-fit: cover;
 
 	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
@@ -21,8 +22,9 @@ const ThumbnailImage = styled.img`
 const MockImage = styled.img`
 	width: 6rem;
 	height: 6rem;
-	border-radius: 1rem;
+	display: flex;
 
+	border-radius: 1rem;
 	background-color: ${(props) => props.theme.colors.grey2};
 
 	@media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
