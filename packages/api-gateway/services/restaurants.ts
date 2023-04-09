@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import { AxiosResponse } from 'axios';
 
 import $axios from '.';
