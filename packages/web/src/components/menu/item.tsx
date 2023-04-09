@@ -1,15 +1,19 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import text from '@/const/text';
-import { RestaurantMenuType } from '@/types/restaurants';
-import { serviceGetRestaurantShortMenu } from '@/services';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFire } from '@fortawesome/free-solid-svg-icons';
+import uesRestaurants from '@/hooks/uesRestaurants';
+import { theme } from '@/styles/theme';
 
 import Thumbnail from '@/components/menu/thumbnail';
+import Price from '@/components/menu/price';
 
 type MenuProps = {
 	id: number;
 	menu: string;
+	topDishes: string[];
+	onFetchSuccess: Function;
 	onSelect: Function;
 };
 
@@ -33,6 +37,19 @@ const Wrapper = styled.li<WrapperProps>`
 	}
 `;
 
+const ThumbnailWrapper = styled.div`
+	position: relative;
+`;
+
+const IconFire = styled(FontAwesomeIcon)`
+	width: 2rem;
+	height: 2rem;
+
+	position: absolute;
+	top: -1rem;
+	right: -1rem;
+`;
+
 const TextWrapper = styled.div`
 	padding-left: 1rem;
 `;
@@ -41,41 +58,44 @@ const Title = styled.h4`
 	line-height: 2rem;
 `;
 
-const Price = styled.span``;
+const MenuItemComponent = ({ id, menu, topDishes, onFetchSuccess, onSelect }: MenuProps) => {
+	const { restaurantShortMenu, fetchRestaurantShortMenu, isLoadingRestaurantShortMenu: isLoading } = uesRestaurants();
 
-const MenuItemComponent = ({ id, menu, onSelect }: MenuProps) => {
-	const [isLoading, setIsLoading] = useState(true);
-	const [shortMenu, setShortMenu] = useState<RestaurantMenuType>();
-
-	const fetchMenu = useCallback(async (menu) => {
-		try {
-			const res = await serviceGetRestaurantShortMenu(id, menu);
-
-			setShortMenu(res);
-		} catch (err) {
-			console.error(err);
-		} finally {
-			setIsLoading(false);
-		}
-	}, []);
+	const [isTopDish, setIsTopDish] = useState(false);
 
 	const handleSelectMenu = () => {
-		onSelect(shortMenu);
+		onSelect(restaurantShortMenu);
 	};
 
 	useEffect(() => {
-		fetchMenu(menu);
+		fetchRestaurantShortMenu(id, menu);
 	}, [id, menu]);
+
+	useEffect(() => {
+		if (restaurantShortMenu) {
+			onFetchSuccess(restaurantShortMenu);
+		}
+	}, [restaurantShortMenu]);
+
+	useEffect(() => {
+		if (topDishes.length && topDishes.includes(menu)) {
+			setIsTopDish(true);
+		}
+	}, [topDishes]);
 
 	return (
 		<Wrapper fetching={isLoading} onClick={handleSelectMenu}>
-			<Thumbnail thumbnail={shortMenu?.thumbnailImage ?? null} alt={shortMenu?.name ?? ''} />
+			<ThumbnailWrapper>
+				<Thumbnail
+					thumbnail={restaurantShortMenu?.thumbnailImage ?? null}
+					alt={restaurantShortMenu?.name ?? ''}
+				/>
+				{isTopDish && <IconFire icon={faFire} color={theme.colors.red} />}
+			</ThumbnailWrapper>
 			{!isLoading && (
 				<TextWrapper>
-					<Title>{shortMenu?.name}</Title>
-					<Price>
-						{shortMenu?.fullPrice} {text.baht}
-					</Price>
+					<Title>{restaurantShortMenu?.name}</Title>
+					<Price menu={restaurantShortMenu} />
 				</TextWrapper>
 			)}
 		</Wrapper>

@@ -1,8 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
+import uesRestaurants from '@/hooks/uesRestaurants';
 import { RestaurantMenuType } from '@/types/restaurants';
-import { serviceGetRestaurantFullMenu } from '@/services';
 
 import MenuItem from '@/components/menu/item';
 import ModalMenu from '@/components/modal/menu';
@@ -15,41 +15,56 @@ type MenuProps = {
 const Wrapper = styled.ul``;
 
 const MenuComponent = ({ id, menus }: MenuProps) => {
-	const [isLoading, setIsLoading] = useState(false);
-	const [selectedMenu, setSelectedItem] = useState<RestaurantMenuType | null>(null);
+	const {
+		setMenuLength,
+		addTopDish,
+		topDishes,
 
-	const fetchMenu = useCallback(async (menu) => {
-		setIsLoading(true);
-		setSelectedItem(menu);
+		restaurantFullMenu,
+		setRestaurantFullMenu,
+		fetchRestaurantFullMenu,
+		isLoadingRestaurantFullMenu: isLoading,
+	} = uesRestaurants();
 
-		try {
-			const res = await serviceGetRestaurantFullMenu(id, menu.name);
-
-			setSelectedItem(res);
-		} catch (err) {
-			console.error(err);
-		} finally {
-			setIsLoading(false);
-		}
-	}, []);
+	const handleFetchSuccess = (data: RestaurantMenuType) => {
+		addTopDish(data);
+	};
 
 	const handleSelectMenu = (selectingMenu: RestaurantMenuType) => {
-		fetchMenu(selectingMenu);
+		fetchRestaurantFullMenu(id, selectingMenu);
 	};
 
 	const handleCloseModal = () => {
-		setSelectedItem(null);
+		setRestaurantFullMenu(null);
 	};
+
+	useEffect(() => {
+		setMenuLength(menus.length);
+	}, [menus]);
 
 	return (
 		<>
 			<Wrapper>
 				{menus.map((menu, index) => {
-					return <MenuItem key={index} id={id} menu={menu} onSelect={handleSelectMenu} />;
+					return (
+						<MenuItem
+							key={index}
+							id={id}
+							menu={menu}
+							topDishes={topDishes}
+							onFetchSuccess={handleFetchSuccess}
+							onSelect={handleSelectMenu}
+						/>
+					);
 				})}
 			</Wrapper>
 
-			<ModalMenu menu={selectedMenu} isLoading={isLoading} isOpen={!!selectedMenu} onClose={handleCloseModal} />
+			<ModalMenu
+				menu={restaurantFullMenu}
+				isLoading={isLoading}
+				isOpen={!!restaurantFullMenu}
+				onClose={handleCloseModal}
+			/>
 		</>
 	);
 };
