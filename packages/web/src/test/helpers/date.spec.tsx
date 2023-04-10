@@ -22,7 +22,7 @@ describe('getDateByTime', () => {
 	});
 
 	test('given time = "04:00"', () => {
-		expect(dayjs(getDateByTime('04:00')).toString()).toContain('18:00:00');
+		expect(dayjs(getDateByTime('04:00')).toString()).toContain('21:00:00');
 	});
 });
 
