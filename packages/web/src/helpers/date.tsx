@@ -5,15 +5,23 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(isBetween);
 dayjs.extend(customParseFormat);
 
-// TODO: Add unit test
-export const getDateByTime = (time: string): Dayjs => {
+export const getDateByTime = (time: string): Dayjs | null => {
 	const now = dayjs().format('DD:MM:YYYY');
-	return dayjs(`${now} ${time}`, 'DD:MM:YYYY HH:mm');
+	const formattedDate = dayjs(`${now} ${time}`, 'DD:MM:YYYY HH:mm');
+
+	if (!formattedDate.isValid()) {
+		return null;
+	}
+
+	return formattedDate;
 };
 
-// TODO: Add unit test
-export const getIsBetweenByTime = (start: string, end: string): boolean => {
-	const now = dayjs();
+export const getIsBetweenByTime = (start: string, end: string, setNow?: string): boolean => {
+	let now = dayjs();
+
+	if (setNow) {
+		now = getDateByTime(setNow) || dayjs();
+	}
 
 	const startDate = getDateByTime(start);
 	const endDate = getDateByTime(end);

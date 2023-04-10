@@ -29,7 +29,6 @@ const PriceComponent = ({ menu }: MenuProps) => {
 	const [discountPrice, setDiscountPrice] = useState(0);
 
 	useEffect(() => {
-		// TODO: Add unit test
 		if (menu?.discountedTimePeriod.begin && menu?.discountedTimePeriod.end) {
 			const isBetween = getIsBetweenByTime(menu?.discountedTimePeriod.begin, menu?.discountedTimePeriod.end);
 
