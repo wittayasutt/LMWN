@@ -15,16 +15,29 @@ const SpinnerWrapper = styled.div`
 	height: 5rem;
 `;
 
+const SpinnerWrapperFull = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: 100vh;
+`;
+
 const Spinner = ({ isFull = false }: SpinnerWrapper) => {
 	if (isFull) {
 		return (
-			<SpinnerWrapper>
+			<SpinnerWrapperFull>
 				<ClipLoader color={theme.colors.primary} />
-			</SpinnerWrapper>
+			</SpinnerWrapperFull>
 		);
 	}
 
-	return <ClipLoader color={theme.colors.primary} />;
+	return (
+		<SpinnerWrapper>
+			<ClipLoader color={theme.colors.primary} />
+		</SpinnerWrapper>
+	);
 };
 
 export default Spinner;

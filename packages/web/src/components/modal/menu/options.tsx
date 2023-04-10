@@ -31,7 +31,7 @@ const OptionsChoice = styled.div`
 
 const OptionsComponent = ({ options, isLoading }: OptionsProps) => {
 	if (isLoading) {
-		return <Spinner isFull />;
+		return <Spinner />;
 	} else if (!options || !options.length) {
 		return null;
 	}
