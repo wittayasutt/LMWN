@@ -1,4 +1,6 @@
 node_modules
 
+packages/api-gateway/coverage
 packages/api-gateway/node_modules
+
 packages/web/node_modules
