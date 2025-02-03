@@ -1,0 +1,4 @@
+node_modules
+
+/packages/api-gateway/node_modules
+/packages/web/node_modules
