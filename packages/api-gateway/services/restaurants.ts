@@ -3,7 +3,6 @@ import { NextFunction, Request, Response } from 'express';
 
 import $axios from '.';
 
-// TODO: move to types
 type RestaurantParams = {
 	id: string;
 };
