@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
 import { AxiosResponse } from 'axios';
+import { NextFunction, Request, Response } from 'express';
 
 import $axios from '.';
 
@@ -13,21 +13,20 @@ type RestaurantMenuParams = {
 	menuName: string;
 };
 
-export const getRestaurant = async (req: Request<RestaurantParams>, res: Response) => {
+export const getRestaurant = async (req: Request<RestaurantParams>, res: Response, next: NextFunction) => {
 	try {
 		const { id: restaurantId } = req.params;
+		const url = `/restaurants/${restaurantId}.json`;
 
-		const response: AxiosResponse = await $axios.get(`/restaurants/${restaurantId}.json`);
+		const response: AxiosResponse = await $axios.get(url);
 
 		return res.status(response.status).json(response.data);
-	} catch (error: any) {
-		// TODO: add to middleware
-		const statusCode = error.response.status || 500;
-		return res.status(statusCode).json(error);
+	} catch (error) {
+		next(error);
 	}
 };
 
-export const getRestaurantShortMenu = async (req: Request, res: Response) => {
+export const getRestaurantShortMenu = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const { id: restaurantId, menuName } = req.params;
 		const url = `/restaurants/${restaurantId}/menus/${menuName}/short.json`;
@@ -35,14 +34,12 @@ export const getRestaurantShortMenu = async (req: Request, res: Response) => {
 		const response: AxiosResponse = await $axios.get(url);
 
 		return res.status(response.status).json(response.data);
-	} catch (error: any) {
-		// TODO: add to middleware
-		const statusCode = error.response.status || 500;
-		return res.status(statusCode).json(error);
+	} catch (error) {
+		next(error);
 	}
 };
 
-export const getRestaurantFullMenu = async (req: Request<RestaurantMenuParams>, res: Response) => {
+export const getRestaurantFullMenu = async (req: Request<RestaurantMenuParams>, res: Response, next: NextFunction) => {
 	try {
 		const { id: restaurantId, menuName } = req.params;
 		const url = `/restaurants/${restaurantId}/menus/${menuName}/full.json`;
@@ -50,9 +47,7 @@ export const getRestaurantFullMenu = async (req: Request<RestaurantMenuParams>, 
 		const response: AxiosResponse = await $axios.get(url);
 
 		return res.status(response.status).json(response.data);
-	} catch (error: any) {
-		// TODO: add to middleware
-		const statusCode = error.response.status || 500;
-		return res.status(statusCode).json(error);
+	} catch (error) {
+		next(error);
 	}
 };
