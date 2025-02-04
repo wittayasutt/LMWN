@@ -1,9 +1,8 @@
+import { RestaurantPage } from '@/pages';
+
 const App = () => {
-	return (
-		<div>
-			<h1>Edit this app to complete LINE MAN Wongnai Frontend Assignment!</h1>
-		</div>
-	);
+	// TODO: Handle a router here
+	return <RestaurantPage />;
 };
 
 export default App;
