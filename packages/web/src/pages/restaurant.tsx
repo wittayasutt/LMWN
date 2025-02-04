@@ -1,3 +1,4 @@
+import { CoverImage } from '@/components';
 import { MainLayout } from '@/layouts';
 import { useGetRestaurant } from '@/services';
 
@@ -6,11 +7,11 @@ type RestaurantPageProps = {
 };
 
 const RestaurantPage = ({ id }: RestaurantPageProps) => {
-	const { data } = useGetRestaurant(id);
+	const { data, isFetching } = useGetRestaurant(id);
 
 	return (
 		<MainLayout>
-			<h1>Edit this app to complete LINE MAN Wongnai Frontend Assignment!</h1>
+			<CoverImage src={data?.coverImage} alt={data?.name} isFetching={isFetching} />
 		</MainLayout>
 	);
 };
