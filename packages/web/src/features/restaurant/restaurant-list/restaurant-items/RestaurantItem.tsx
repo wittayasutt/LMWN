@@ -7,11 +7,19 @@ import Detail from './Detail';
 type RestaurantItemProps = {
 	menuName: string;
 	restaurantId: string;
+	isFetching?: boolean;
 	onSelect: (menuName: string) => void;
 };
 
-const RestaurantItem = ({ menuName, restaurantId, onSelect }: RestaurantItemProps) => {
-	const { data, isFetching } = useGetRestaurantMenu(restaurantId, menuName);
+const RestaurantItem = ({
+	menuName,
+	restaurantId,
+	isFetching: isFetchingRestaurant,
+	onSelect,
+}: RestaurantItemProps) => {
+	const { data, isFetching: isFetchingMenu } = useGetRestaurantMenu(restaurantId, menuName);
+
+	const isFetching = isFetchingRestaurant || isFetchingMenu;
 
 	return (
 		<div

@@ -24,7 +24,7 @@ const RestaurantTitle = ({ data, isFetching }: RestaurantTitleProps) => {
 	}
 
 	return (
-		<div className='flex items-center pb-6'>
+		<div className='flex items-center pb-4'>
 			<h1 className='text-3xl'>{data?.name}</h1>
 			<div
 				className={clsx(

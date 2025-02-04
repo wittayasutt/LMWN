@@ -9,6 +9,7 @@ const getRestaurant = async (id: string) => {
 
 export const useGetRestaurant = (id: string): UseQueryResult<RestaurantType> => {
 	return useQuery({
+		enabled: !!id,
 		queryFn: () => getRestaurant(id),
 		queryKey: ['restaurant', id],
 	});
