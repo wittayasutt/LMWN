@@ -1,6 +1,7 @@
 import { uniq } from 'lodash';
 import { useMemo } from 'react';
 import { RestaurantType } from '@/types';
+
 import { RestaurantItem } from './';
 import RestaurantTitle from './RestaurantTitle';
 
