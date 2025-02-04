@@ -26,3 +26,7 @@ export const errorAxiosHandler = (error: Error, req: Request, res: Response, nex
 		next(error);
 	}
 };
+
+export const errorNotFoundHandler = (req: Request, res: Response) => {
+	return res.status(httpStatus.NOT_FOUND).json({ message: httpStatus[httpStatus.NOT_FOUND], method: req.method });
+};

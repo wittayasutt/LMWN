@@ -1,7 +1,7 @@
 import 'jest-extended';
 import request from 'supertest';
 
-import app from '../../../index';
+import app from '../../../app';
 
 // constant
 const RESTAURANT_ID_1 = 567051;
