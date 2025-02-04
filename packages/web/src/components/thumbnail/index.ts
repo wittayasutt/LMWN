@@ -1,2 +1,2 @@
-export { default as Skeleton } from './Skeleton';
+export { default as ThumbnailSkeleton } from './ThumbnailSkeleton';
 export { default as Thumbnail } from './Thumbnail';

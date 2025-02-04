@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components';
+import { ThumbnailSkeleton } from '@/components';
 
 type CoverImageProps = {
 	alt?: string;
@@ -8,7 +8,7 @@ type CoverImageProps = {
 
 const CoverImage = ({ alt, isFetching, src }: CoverImageProps) => {
 	if (isFetching) {
-		return <Skeleton className='h-80' />;
+		return <ThumbnailSkeleton className='h-80' />;
 	}
 
 	return <img className='h-80 w-full object-cover' src={src} alt={alt} />;
