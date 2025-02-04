@@ -24,7 +24,7 @@ const RestaurantItem = ({
 	return (
 		<div
 			className={clsx(
-				'flex p-2 mb-4 rounded-2xl cursor-pointer',
+				'flex p-2 mb-2 md:mb-4 rounded-2xl cursor-pointer',
 				isFetching ? 'bg-gray-100 dark:bg-gray-200 animate-pulse' : 'bg-inherit',
 			)}
 			onClick={() => onSelect(menuName)}
