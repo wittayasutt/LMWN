@@ -4,7 +4,7 @@ import { useGetRestaurantMenu, useGetRestaurantTopDishes } from '@/services';
 import CoverImage from './CoverImage';
 import Detail from './Detail';
 
-type RestaurantItemProps = {
+export type RestaurantItemProps = {
 	menuName?: string;
 	restaurantId?: string;
 	isFetching?: boolean;

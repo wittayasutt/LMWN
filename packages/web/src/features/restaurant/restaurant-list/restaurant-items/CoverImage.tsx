@@ -25,7 +25,13 @@ const CoverImage = (props: CoverImageProps) => {
 	return (
 		<div className='w-30 min-w-30 md:w-40 md:min-w-40 relative'>
 			<Image {...props} />
-			{isTopDish && <FontAwesomeIcon className='absolute -top-2 -right-2 text-3xl text-red-400' icon={faFire} />}
+			{isTopDish && (
+				<FontAwesomeIcon
+					className='absolute -top-2 -right-2 text-3xl text-red-400'
+					icon={faFire}
+					data-testid='top-dish'
+				/>
+			)}
 		</div>
 	);
 };

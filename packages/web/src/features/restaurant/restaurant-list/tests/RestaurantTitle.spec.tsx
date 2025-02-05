@@ -31,7 +31,7 @@ describe('RestaurantTitle Component', () => {
 	});
 
 	it("given all the data and it's on open time, should render badge correctly", () => {
-		vi.mocked(getIsBetweenByTime).mockReturnValue(true);
+		(getIsBetweenByTime as jest.Mock).mockReturnValue(true);
 
 		render(<RestaurantTitle {...props} />);
 
@@ -40,7 +40,7 @@ describe('RestaurantTitle Component', () => {
 	});
 
 	it("given all the data and it's on open time, should render badge correctly", () => {
-		vi.mocked(getIsBetweenByTime).mockReturnValue(false);
+		(getIsBetweenByTime as jest.Mock).mockReturnValue(false);
 
 		render(<RestaurantTitle {...props} />);
 
