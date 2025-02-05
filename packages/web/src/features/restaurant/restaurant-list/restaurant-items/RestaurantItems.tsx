@@ -16,9 +16,7 @@ const RestaurantItems = ({ data, isFetching, onSelectMenu }: RestaurantItemProps
 	}, [data]);
 
 	if (isFetching) {
-		return Array.from({ length: 5 }, (_, i) => (
-			<RestaurantItem key={i} restaurantId={''} menuName={''} isFetching={isFetching} onSelect={onSelectMenu} />
-		));
+		return Array.from({ length: 5 }, (_, i) => <RestaurantItem key={i} isFetching={isFetching} />);
 	}
 
 	return (

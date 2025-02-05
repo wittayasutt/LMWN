@@ -5,10 +5,10 @@ import CoverImage from './CoverImage';
 import Detail from './Detail';
 
 type RestaurantItemProps = {
-	menuName: string;
-	restaurantId: string;
+	menuName?: string;
+	restaurantId?: string;
 	isFetching?: boolean;
-	onSelect: (menuName: string) => void;
+	onSelect?: (menuName: string) => void;
 };
 
 const RestaurantItem = ({
@@ -27,7 +27,7 @@ const RestaurantItem = ({
 				'flex p-2 mb-2 md:mb-4 rounded-2xl cursor-pointer',
 				isFetching ? 'bg-gray-100 dark:bg-gray-200 animate-pulse' : 'bg-inherit',
 			)}
-			onClick={() => !isFetching && onSelect(menuName)}
+			onClick={() => !isFetching && menuName && onSelect?.(menuName)}
 		>
 			<CoverImage src={data?.thumbnailImage} alt={data?.name} isFetching={isFetching} />
 			<Detail menu={data} isFetching={isFetching} />

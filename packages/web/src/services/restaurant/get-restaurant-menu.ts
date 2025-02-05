@@ -7,10 +7,10 @@ const getRestaurantMenu = async (restaurantId: string, menuName: string) => {
 	return data;
 };
 
-export const useGetRestaurantMenu = (restaurantId: string, menuName: string): UseQueryResult<RestaurantMenuType> => {
+export const useGetRestaurantMenu = (restaurantId?: string, menuName?: string): UseQueryResult<RestaurantMenuType> => {
 	return useQuery({
 		enabled: !!restaurantId && !!menuName,
-		queryFn: () => getRestaurantMenu(restaurantId, menuName),
+		queryFn: () => getRestaurantMenu(restaurantId!, menuName!),
 		queryKey: ['restaurant-short', restaurantId, menuName],
 	});
 };
