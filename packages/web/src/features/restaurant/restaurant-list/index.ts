@@ -1,3 +1,3 @@
 export { default as RestaurantList } from './RestaurantList';
 
-export * from './restaurant-items';
+export * from './RestaurantItems';

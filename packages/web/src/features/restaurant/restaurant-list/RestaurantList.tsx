@@ -1,6 +1,6 @@
 import { RestaurantType } from '@/types';
 
-import { RestaurantItems } from './';
+import RestaurantItems from './RestaurantItems';
 import RestaurantTitle from './RestaurantTitle';
 
 type RestaurantListProps = {

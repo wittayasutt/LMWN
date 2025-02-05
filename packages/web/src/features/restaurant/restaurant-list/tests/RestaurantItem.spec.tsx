@@ -4,7 +4,7 @@ import { useGetRestaurantMenu, useGetRestaurantTopDishes } from '@/services';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import RestaurantItem, { RestaurantItemProps } from '../restaurant-items/RestaurantItem';
+import RestaurantItem, { RestaurantItemProps } from '../RestaurantItems/RestaurantItem';
 
 vi.mock('@/services', () => ({
 	useGetRestaurantMenu: vi.fn(),
