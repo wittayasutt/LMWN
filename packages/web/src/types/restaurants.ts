@@ -30,8 +30,8 @@ export type RestaurantMenuType = {
 	id: string;
 	thumbnailImage: string | null;
 	fullPrice: number;
-	discountedPercent: number;
-	discountedTimePeriod: DiscountedTimePeriodType;
+	discountedPercent?: number;
+	discountedTimePeriod?: DiscountedTimePeriodType;
 	sold: number;
 	totalInStock: number;
 };

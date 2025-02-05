@@ -23,6 +23,7 @@ const RestaurantItem = ({
 	const isFetching = isFetchingRestaurant || isFetchingMenu;
 	const isTopDish = topDishes?.some((topDish) => topDish === menuName);
 
+	// TODO: Handle totalInStock = 0
 	return (
 		<div
 			className={clsx(
