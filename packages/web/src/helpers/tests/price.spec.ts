@@ -1,3 +1,4 @@
+import { mockRestaurantMenu } from '@/mocks';
 import { getDiscountPrice, getDiscountPriceByMenu } from '../price';
 
 describe('getDiscountPrice', () => {
@@ -19,22 +20,13 @@ describe('getDiscountPrice', () => {
 });
 
 describe('getDiscountPriceByMenu', () => {
-	const mockMenu = Object.freeze({
-		fullPrice: 80,
-		id: 'ข้าวผัดปลาทู',
-		name: 'ข้าวผัดปลาทู',
-		sold: 100,
-		thumbnailImage: 'https://img.wongnai.com/p/100x100/2021/08/14/95cf2410d1734ca7905672446141a699.jpg',
-		totalInStock: 200,
-	});
-
 	test('given no discountedTimePeriod, should get null', () => {
-		expect(getDiscountPriceByMenu(mockMenu)).toBeNull();
+		expect(getDiscountPriceByMenu(mockRestaurantMenu)).toBeNull();
 	});
 
 	test("given no discountedTimePeriod's begin time, should get null", () => {
 		const menu = {
-			...mockMenu,
+			...mockRestaurantMenu,
 			discountedPercent: 50,
 			discountedTimePeriod: {
 				begin: '',
@@ -49,7 +41,7 @@ describe('getDiscountPriceByMenu', () => {
 
 	test("given no discountedTimePeriod's end time, should get null", () => {
 		const menu = {
-			...mockMenu,
+			...mockRestaurantMenu,
 			discountedPercent: 50,
 			discountedTimePeriod: {
 				begin: '10:00',
@@ -64,7 +56,7 @@ describe('getDiscountPriceByMenu', () => {
 
 	test('given no discountedPercent, should get null', () => {
 		const menu = {
-			...mockMenu,
+			...mockRestaurantMenu,
 			discountedTimePeriod: {
 				begin: '10:00',
 				end: '12:00',
@@ -78,7 +70,7 @@ describe('getDiscountPriceByMenu', () => {
 
 	test("given it doesn't on discountedTimePeriod, should get null", () => {
 		const menu = {
-			...mockMenu,
+			...mockRestaurantMenu,
 			discountedPercent: 50,
 			discountedTimePeriod: {
 				begin: '10:00',
@@ -93,7 +85,7 @@ describe('getDiscountPriceByMenu', () => {
 
 	test('given discountedPercent = 50, should get 50% of full price', () => {
 		const menu = {
-			...mockMenu,
+			...mockRestaurantMenu,
 			discountedPercent: 50,
 			discountedTimePeriod: {
 				begin: '10:00',
@@ -109,7 +101,7 @@ describe('getDiscountPriceByMenu', () => {
 
 	test('given discountedPercent = 25, should get 75% of full price', () => {
 		const menu = {
-			...mockMenu,
+			...mockRestaurantMenu,
 			discountedPercent: 25,
 			discountedTimePeriod: {
 				begin: '10:00',

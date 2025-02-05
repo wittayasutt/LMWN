@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Thumbnail, ThumbnailSkeleton } from '@/components';
 
-type CoverImageProps = {
+export type CoverImageProps = {
 	alt?: string;
 	className?: string;
 	isFetching: boolean;

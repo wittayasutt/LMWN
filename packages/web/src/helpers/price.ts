@@ -1,6 +1,5 @@
+import { getIsBetweenByTime } from '@/helpers';
 import { RestaurantMenuType } from '@/types';
-
-import { getIsBetweenByTime } from './date';
 
 export const getDiscountPrice = (fullPrice: number, discountedPercent: number): number => {
 	const RatioPrice = (100 - discountedPercent) / 100;

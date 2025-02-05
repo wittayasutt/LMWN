@@ -5,7 +5,7 @@ import { getIsBetweenByTime } from '@/helpers';
 import { RestaurantType } from '@/types';
 import { th } from '@/lang';
 
-type RestaurantTitleProps = {
+export type RestaurantTitleProps = {
 	data?: RestaurantType;
 	isFetching: boolean;
 };
