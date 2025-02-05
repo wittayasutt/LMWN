@@ -40,3 +40,5 @@ export type RestaurantMenuFullType = RestaurantMenuType & {
 	largeImage: string | null;
 	options: RestaurantOptionType[];
 };
+
+export type RestaurantTopDishes = string[];

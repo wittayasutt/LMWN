@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useGetRestaurantMenu } from '@/services';
+import { useGetRestaurantMenu, useGetRestaurantTopDishes } from '@/services';
 
 import CoverImage from './CoverImage';
 import Detail from './Detail';
@@ -18,8 +18,10 @@ const RestaurantItem = ({
 	onSelect,
 }: RestaurantItemProps) => {
 	const { data, isFetching: isFetchingMenu } = useGetRestaurantMenu(restaurantId, menuName);
+	const { data: topDishes } = useGetRestaurantTopDishes(restaurantId);
 
 	const isFetching = isFetchingRestaurant || isFetchingMenu;
+	const isTopDish = topDishes?.some((topDish) => topDish === menuName);
 
 	return (
 		<div
@@ -29,7 +31,7 @@ const RestaurantItem = ({
 			)}
 			onClick={() => !isFetching && menuName && onSelect?.(menuName)}
 		>
-			<CoverImage src={data?.thumbnailImage} alt={data?.name} isFetching={isFetching} />
+			<CoverImage src={data?.thumbnailImage} alt={data?.name} isFetching={isFetching} isTopDish={isTopDish} />
 			<Detail menu={data} isFetching={isFetching} />
 		</div>
 	);

@@ -21,7 +21,7 @@ const Detail = (props: DetailProps) => {
 
 	return (
 		<div className='py-1 pl-4'>
-			<h4 className='mb-1 md:mb-2 text-base md:text-xl'>{menu?.name}</h4>
+			<h4 className='md:mb-2 text-lg md:text-xl'>{menu?.name}</h4>
 			<DetailPrice menu={menu} />
 		</div>
 	);

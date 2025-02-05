@@ -2,6 +2,8 @@ import { CoverImage, ModalContent } from '@/components';
 import { RestaurantMenuFullType } from '@/types';
 import { th } from '@/lang';
 
+import { Price } from '../components';
+
 type RestaurantModalContentProps = {
 	isFetching: boolean;
 	isTopDish?: boolean;
@@ -13,7 +15,7 @@ const ContentTitle = ({ menu, isTopDish }: RestaurantModalContentProps) => {
 	return (
 		<div className='flex justify-between items-center'>
 			<h4 className='text-lg md:text-xl'>
-				{th.price} {menu?.fullPrice} {th.baht}
+				{th.price} <Price menu={menu} />
 			</h4>
 			{isTopDish && <h4 className='text-lg md:text-xl'>{th.recommend}</h4>}
 		</div>
