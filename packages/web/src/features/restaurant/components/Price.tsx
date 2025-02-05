@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getDiscountPriceByMenu } from '@/helpers';
 import { RestaurantMenuType } from '@/types';
 import { th } from '@/lang';
@@ -10,14 +10,33 @@ type PriceProps = {
 const Price = ({ menu }: PriceProps) => {
 	const [discountPrice, setDiscountPrice] = useState<number | null>(null);
 
+	// TODO: remove this function, make it for show since the actual data doesn't have a discount price
+	const mockDiscountPrice = useCallback(
+		(menuItem: RestaurantMenuType): number | null => {
+			const mockMenu = {
+				...menuItem,
+				discountedPercent: 25,
+				discountedTimePeriod: {
+					begin: '10:30',
+					end: '20:00"',
+				},
+			};
+
+			return menu?.id === 'โรตี แกงเขียวหวานหมู  ไก่'
+				? getDiscountPriceByMenu(mockMenu)
+				: getDiscountPriceByMenu(menuItem);
+		},
+		[menu],
+	);
+
 	useEffect(() => {
 		if (!menu) {
 			return;
 		}
 
-		const menuDiscountPrice = getDiscountPriceByMenu(menu);
+		const menuDiscountPrice = mockDiscountPrice(menu);
 		setDiscountPrice(menuDiscountPrice);
-	}, [menu]);
+	}, [menu, mockDiscountPrice]);
 
 	if (!menu) {
 		return <span>- {th.baht}</span>;
@@ -27,7 +46,7 @@ const Price = ({ menu }: PriceProps) => {
 				<span className='mr-2 line-through'>
 					{menu?.fullPrice} {th.baht}
 				</span>
-				<span>
+				<span className='text-red-400'>
 					{discountPrice} {th.baht}
 				</span>
 			</>

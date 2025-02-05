@@ -82,3 +82,24 @@ export const mockRestaurantMenu = Object.freeze({
 	thumbnailImage: 'https://img.wongnai.com/p/100x100/2021/08/14/95cf2410d1734ca7905672446141a699.jpg',
 	totalInStock: 200,
 });
+
+export const mockRestaurantMenuFull = Object.freeze({
+	name: 'ข้าวผัดปลาทู',
+	id: 'ข้าวผัดปลาทู',
+	thumbnailImage: 'https://img.wongnai.com/p/100x100/2021/08/14/95cf2410d1734ca7905672446141a699.jpg',
+	discountedPercent: 0,
+	sold: 100,
+	fullPrice: 80,
+	totalInStock: 200,
+	options: [
+		{
+			label: 'ไข่',
+			choices: [
+				{
+					label: 'ไข่ดาว',
+				},
+			],
+		},
+	],
+	largeImage: 'https://img.wongnai.com/p/1920x0/2021/08/14/95cf2410d1734ca7905672446141a699.jpg',
+});
