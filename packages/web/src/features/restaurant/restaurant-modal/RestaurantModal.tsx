@@ -22,7 +22,7 @@ const RestaurantModal = ({ menuName, restaurantId, onClose }: RestaurantModalPro
 
 	return (
 		<ModalBackdrop onClose={onClose}>
-			<RestaurantModalContent menu={data} onClose={onClose} />;
+			<RestaurantModalContent menu={data} isFetching={isFetching} onClose={onClose} />;
 		</ModalBackdrop>
 	);
 };

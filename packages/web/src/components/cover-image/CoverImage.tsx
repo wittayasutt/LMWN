@@ -4,7 +4,7 @@ import { Thumbnail, ThumbnailSkeleton } from '@/components';
 type CoverImageProps = {
 	alt?: string;
 	className?: string;
-	isFetching?: boolean;
+	isFetching: boolean;
 	src?: string | null;
 };
 
