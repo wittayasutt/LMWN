@@ -1,6 +1,8 @@
 import { CoverImage, ModalContent } from '@/components';
 import { RestaurantMenuFullType } from '@/types';
-import { RestaurantModalContentTitle, RestaurantModalContentOptions } from './';
+
+import RestaurantModalContentOptions from './RestaurantModalContentOptions';
+import RestaurantModalContentTitle from './RestaurantModalContentTitle';
 
 type RestaurantModalContentProps = {
 	isFetching: boolean;
