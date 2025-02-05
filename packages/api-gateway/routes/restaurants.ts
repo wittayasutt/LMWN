@@ -1,10 +1,5 @@
 import express from 'express';
-import {
-	getRestaurant,
-	getRestaurantShortMenu,
-	getRestaurantFullMenu,
-	getRestaurantTopDishes,
-} from '../services/restaurants';
+import { getRestaurant, getRestaurantShortMenu, getRestaurantFullMenu, getRestaurantTopDishes } from '../controllers';
 
 const router = express.Router();
 
