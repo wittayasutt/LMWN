@@ -3,7 +3,7 @@ import { ModalBackdrop, Spinner } from '@/components';
 
 import RestaurantModalContent from './RestaurantModalContent';
 
-type RestaurantModalProps = {
+export type RestaurantModalProps = {
 	menuName: string;
 	restaurantId: string;
 	onClose: () => void;

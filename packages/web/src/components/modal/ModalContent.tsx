@@ -15,7 +15,7 @@ const ModalContent = ({ children, title, onClose }: ModalContentProps) => {
 				<div className='flex justify-center items-center rounded-t'>
 					<h3 className='flex-1 text-xl md:text-2xl text-center pl-16'>{title}</h3>
 					<div className='flex justify-center items-center h-16 w-16 cursor-pointer' onClick={onClose}>
-						<FontAwesomeIcon icon={faChevronDown} />
+						<FontAwesomeIcon icon={faChevronDown} data-testid='btn-close' />
 					</div>
 				</div>
 				{children}
