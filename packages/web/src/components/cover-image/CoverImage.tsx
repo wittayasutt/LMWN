@@ -1,17 +1,21 @@
-import { ThumbnailSkeleton } from '@/components';
+import clsx from 'clsx';
+import { Thumbnail, ThumbnailSkeleton } from '@/components';
 
 type CoverImageProps = {
 	alt?: string;
-	isFetching: boolean;
-	src?: string;
+	className?: string;
+	isFetching?: boolean;
+	src?: string | null;
 };
 
-const CoverImage = ({ alt, isFetching, src }: CoverImageProps) => {
+const CoverImage = ({ alt, className, isFetching, src }: CoverImageProps) => {
 	if (isFetching) {
-		return <ThumbnailSkeleton className='h-80' />;
+		return <ThumbnailSkeleton className={className} />;
+	} else if (!src) {
+		return <Thumbnail className={className} />;
 	}
 
-	return <img className='h-80 w-full object-cover' src={src} alt={alt} />;
+	return <img className={clsx('w-full object-cover', className)} src={src} alt={alt} />;
 };
 
 export default CoverImage;
