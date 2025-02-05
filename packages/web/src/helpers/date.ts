@@ -16,8 +16,12 @@ export const getDateByTime = (time: string): Dayjs | null => {
 	return formattedDate;
 };
 
-export const getIsBetweenByTime = (start: string, end: string): boolean => {
-	const now = dayjs();
+export const getIsBetweenByTime = (start: string, end: string, setNow?: string): boolean => {
+	let now = dayjs();
+
+	if (setNow) {
+		now = getDateByTime(setNow) || dayjs();
+	}
 
 	const startDate = getDateByTime(start);
 	const endDate = getDateByTime(end);
