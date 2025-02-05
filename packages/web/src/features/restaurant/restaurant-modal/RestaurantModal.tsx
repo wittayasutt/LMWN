@@ -1,4 +1,4 @@
-import { useGetRestaurantMenuFull } from '@/services';
+import { useGetRestaurantMenuFull, useGetRestaurantTopDishes } from '@/services';
 import { ModalBackdrop, Spinner } from '@/components';
 
 import RestaurantModalContent from './RestaurantModalContent';
@@ -11,6 +11,9 @@ type RestaurantModalProps = {
 
 const RestaurantModal = ({ menuName, restaurantId, onClose }: RestaurantModalProps) => {
 	const { data, isFetching } = useGetRestaurantMenuFull(restaurantId, menuName);
+	const { data: topDishes } = useGetRestaurantTopDishes(restaurantId);
+
+	const isTopDish = topDishes?.some((topDish) => topDish === menuName);
 
 	if (isFetching) {
 		return (
@@ -22,7 +25,7 @@ const RestaurantModal = ({ menuName, restaurantId, onClose }: RestaurantModalPro
 
 	return (
 		<ModalBackdrop onClose={onClose}>
-			<RestaurantModalContent menu={data} isFetching={isFetching} onClose={onClose} />;
+			<RestaurantModalContent menu={data} isFetching={isFetching} isTopDish={isTopDish} onClose={onClose} />;
 		</ModalBackdrop>
 	);
 };
