@@ -2,9 +2,18 @@ import { AxiosResponse } from 'axios';
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { fetchRestaurant, fetchRestaurantMenu, fetchRestaurantTopDishes } from '../services/restaurants';
+import { sanitizeGetRestaurant } from '../middlewares';
+import { filterItems } from '../utils';
+import { RestaurantType } from '../types';
 
 type RestaurantParams = {
 	id: string;
+};
+
+type RestaurantMenuListParams = {
+	id: string;
+	page: number;
+	itemPerPage: number;
 };
 
 type RestaurantMenuParams = {
@@ -17,7 +26,41 @@ export const getRestaurant = async (req: Request<RestaurantParams>, res: Respons
 	try {
 		const { id } = req.params;
 		const response: AxiosResponse = await fetchRestaurant(id);
-		return res.status(httpStatus.OK).json(response.data);
+
+		const sanitizedRestaurant = sanitizeGetRestaurant(response.data);
+		return res.status(httpStatus.OK).json(sanitizedRestaurant);
+	} catch (error) {
+		next(error);
+	}
+};
+
+export const getRestaurantMenuList = async (
+	req: Request<RestaurantMenuListParams>,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const { id } = req.params;
+
+		const page = parseInt((req.query.page as string) || '1', 10);
+		const itemPerPage = parseInt((req.query.itemPerPage as string) || '16', 10);
+
+		const restaurantsResponse: AxiosResponse = await fetchRestaurant(id);
+
+		const menus = filterItems<string>(restaurantsResponse.data.menus, page, itemPerPage);
+		const fullMenus = await Promise.all(
+			menus.map((menu) => fetchRestaurantMenu(id, menu, 'short').then((res) => res.data)),
+		);
+
+		const response = {
+			itemPerPage,
+			menus: fullMenus,
+			page,
+			total: restaurantsResponse.data.menus.length,
+			totalPage: restaurantsResponse.data.menus.length / itemPerPage,
+		};
+
+		return res.status(httpStatus.OK).json(response);
 	} catch (error) {
 		next(error);
 	}

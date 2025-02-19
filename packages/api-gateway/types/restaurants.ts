@@ -25,6 +25,13 @@ export type RestaurantType = {
 	name: string;
 };
 
+export type RestaurantResponseType = {
+	activeTimePeriod: ActiveTimePeriodType;
+	coverImage: string;
+	id: number;
+	name: string;
+};
+
 export type RestaurantMenuType = {
 	name: string;
 	id: string;
