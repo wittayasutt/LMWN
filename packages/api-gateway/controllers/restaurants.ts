@@ -21,7 +21,6 @@ type RestaurantMenuParams = {
 	menuName: string;
 };
 
-// TODO: use Promise.all to get short menu preventing overhead and handle it with pagination
 export const getRestaurant = async (req: Request<RestaurantParams>, res: Response, next: NextFunction) => {
 	try {
 		const { id } = req.params;

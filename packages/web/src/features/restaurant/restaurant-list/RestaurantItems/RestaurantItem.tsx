@@ -1,27 +1,20 @@
 import clsx from 'clsx';
-import { useGetRestaurantMenu, useGetRestaurantTopDishes } from '@/services';
+import { useGetRestaurantTopDishes } from '@/services';
+import { RestaurantMenuType } from '@/types';
 
 import CoverImage from './CoverImage';
 import Detail from './Detail';
 
 export type RestaurantItemProps = {
-	menuName?: string;
+	menu?: RestaurantMenuType;
 	restaurantId?: string;
 	isFetching?: boolean;
 	onSelect?: (menuName: string) => void;
 };
 
-const RestaurantItem = ({
-	menuName,
-	restaurantId,
-	isFetching: isFetchingRestaurant,
-	onSelect,
-}: RestaurantItemProps) => {
-	const { data, isFetching: isFetchingMenu } = useGetRestaurantMenu(restaurantId, menuName);
+const RestaurantItem = ({ menu, isFetching = false, restaurantId, onSelect }: RestaurantItemProps) => {
 	const { data: topDishes } = useGetRestaurantTopDishes(restaurantId);
-
-	const isFetching = isFetchingRestaurant || isFetchingMenu;
-	const isTopDish = topDishes?.some((topDish) => topDish === menuName);
+	const isTopDish = topDishes?.some((topDish) => topDish === menu?.name);
 
 	// TODO: Handle totalInStock = 0
 	return (
@@ -30,10 +23,10 @@ const RestaurantItem = ({
 				'flex p-2 mb-2 md:mb-4 rounded-2xl cursor-pointer',
 				isFetching ? 'bg-gray-100 dark:bg-gray-200 animate-pulse' : 'bg-inherit',
 			)}
-			onClick={() => !isFetching && menuName && onSelect?.(menuName)}
+			onClick={() => !isFetching && menu && onSelect?.(menu.name)}
 		>
-			<CoverImage src={data?.thumbnailImage} alt={data?.name} isFetching={isFetching} isTopDish={isTopDish} />
-			<Detail menu={data} isFetching={isFetching} />
+			<CoverImage src={menu?.thumbnailImage} alt={menu?.name} isFetching={isFetching} isTopDish={isTopDish} />
+			<Detail menu={menu} isFetching={isFetching} />
 		</div>
 	);
 };

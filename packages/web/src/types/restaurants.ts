@@ -36,6 +36,17 @@ export type RestaurantMenuType = {
 	totalInStock: number;
 };
 
+export type RestaurantMenuMeta = {
+	itemPerPage: number;
+	page: number;
+	total: number;
+	totalPage: number;
+};
+
+export type RestaurantMenus = RestaurantMenuMeta & {
+	menus: RestaurantMenuType[];
+};
+
 export type RestaurantMenuFullType = RestaurantMenuType & {
 	largeImage: string | null;
 	options: RestaurantOptionType[];
